@@ -107,6 +107,7 @@ celerybeat.pid
 env/
 venv/
 fredvenv/
+credentials.py
 ENV/
 env.bak/
 venv.bak/
