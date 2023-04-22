@@ -1,0 +1,6 @@
+
+fredapi==0.5.0
+ipykernel==6.22.0
+matplotlib==3.7.1
+numpy==1.24.2
+pandas==2.0.0
