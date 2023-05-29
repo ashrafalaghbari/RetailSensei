@@ -1,10 +1,9 @@
 on:
-  # add workflow_dispatch
   workflow_dispatch:
-  # add schedule
-
-  # schedule:
-  #   - cron: "*/2 * * * *"
+    inputs:
+      manual_run:
+        description: 'Manually trigger the workflow'
+        default: ''
 
 jobs:
   run_pipeline:
@@ -19,17 +18,19 @@ jobs:
         with:
           python-version: 3.x
 
-      # Authenticate with Google Cloud
-
-      - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v0
+      - name: Authenticate with Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v1
         with:
-          # version: '358.0.0'
-          # project_id: YOUR_PROJECT_ID
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Use gcloud CLI
+        run: gcloud info
 
       # Install dependencies and run the scripts
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -42,10 +43,8 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
           DB_NAME: ${{ secrets.DB_NAME }}
-
-
         run: |
-          fred_to_db.py
+          python fred_to_db.py
 
       - name: Run data pipeline - Cloud SQL to CSV
         env:
@@ -54,7 +53,7 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME }}
           INSTANCE_CONNECTION_NAME: ${{ secrets.INSTANCE_CONNECTION_NAME }}
         run: |
-          db_to_streamlit.py
+          python db_to_streamlit.py
 
       - name: Upload CSV artifact
         uses: actions/upload-artifact@v2
