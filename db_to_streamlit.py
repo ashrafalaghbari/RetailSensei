@@ -1,11 +1,14 @@
 # Establish connection to google cloud sql
 import os
 import pandas as pd
-from credentials import (
-    DB_USER, DB_PASS ,DB_NAME ,INSTANCE_CONNECTION_NAME
-)
 from google.cloud.sql.connector import Connector, IPTypes
 import sqlalchemy
+
+# Get environment variables for database connection
+DB_USER = os.environ['DB_USER']
+DB_PASS = os.environ['DB_PASS']
+DB_NAME = os.environ['DB_NAME']
+INSTANCE_CONNECTION_NAME = os.environ['INSTANCE_CONNECTION_NAME']
 
 # initialize Connector object
 connector = Connector()
