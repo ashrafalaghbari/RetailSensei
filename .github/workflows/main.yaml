@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: "43 5 * * *"
+    - cron: "55 5 * * *"
 
 jobs:
   run_pipeline:
