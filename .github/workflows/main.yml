@@ -1,6 +1,10 @@
 on:
-  schedule:
-    - cron: "*/2 * * * *"
+  # add workflow_dispatch
+  workflow_dispatch:
+  # add schedule
+  
+  # schedule:
+  #   - cron: "*/2 * * * *"
 
 jobs:
   run_pipeline:
