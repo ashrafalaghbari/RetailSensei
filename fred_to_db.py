@@ -1,9 +1,12 @@
 import pandas as pd
+import os
 from fredapi import Fred
 from credentials import FRED_API_KEY
 import sqlalchemy
 from google.cloud.sql.connector import Connector, IPTypes
 
+# # get FRED API key
+FRED_API_KEY = os.environ['FRED_API_KEY']
 
 # get data from FRED
 fred = Fred(api_key = FRED_API_KEY)
@@ -38,13 +41,14 @@ sales_tuples = [(index.date(), float(sales)) for index, sales in df.itertuples()
 import datetime
 last_date= (datetime.date(2023, 5, 1), 690.857)
 
+
+# Get environment variables for database connection
+DB_USER = os.environ['DB_USER']
+DB_PASS = os.environ['DB_PASS']
+DB_NAME = os.environ['DB_NAME']
+INSTANCE_CONNECTION_NAME = os.environ['INSTANCE_CONNECTION_NAME']
+
 # Establish connection to google cloud sql
-import os
-from credentials import (
-    DB_USER, DB_PASS ,DB_NAME ,INSTANCE_CONNECTION_NAME
-)
-
-
 # initialize Connector object
 connector = Connector()
 ip_type = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
