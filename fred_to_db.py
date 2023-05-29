@@ -1,7 +1,6 @@
 import pandas as pd
 import os
 from fredapi import Fred
-from credentials import FRED_API_KEY
 import sqlalchemy
 from google.cloud.sql.connector import Connector, IPTypes
 
