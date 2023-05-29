@@ -15,6 +15,17 @@ jobs:
         with:
           python-version: 3.x
 
+      # Authenticate with Google Cloud
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          version: '358.0.0'
+          project_id: YOUR_PROJECT_ID
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+
+      # Install dependencies and run the scripts
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -27,7 +38,8 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
           DB_NAME: ${{ secrets.DB_NAME }}
-          
+
+
         run: |
           fred_to_db.py
 
@@ -41,7 +53,7 @@ jobs:
           db_to_streamlit.py
 
       - name: Upload CSV artifact
-          uses: actions/upload-artifact@v2
-          with:
-            name: test-csv
-            path: test.csv
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-csv
+          path: test.csv
