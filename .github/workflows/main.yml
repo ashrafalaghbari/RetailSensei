@@ -22,7 +22,7 @@ jobs:
       # Authenticate with Google Cloud
 
       - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@master
+        uses: google-github-actions/setup-gcloud@v0
         with:
           # version: '358.0.0'
           # project_id: YOUR_PROJECT_ID
