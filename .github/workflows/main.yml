@@ -2,7 +2,7 @@ on:
   # add workflow_dispatch
   workflow_dispatch:
   # add schedule
-  
+
   # schedule:
   #   - cron: "*/2 * * * *"
 
@@ -24,7 +24,7 @@ jobs:
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@master
         with:
-          version: '358.0.0'
+          # version: '358.0.0'
           project_id: YOUR_PROJECT_ID
           service_account_key: ${{ secrets.GCP_SA_KEY }}
 
