@@ -84,9 +84,9 @@ jobs:
       - name: Authorize Docker push
         run: gcloud auth configure-docker --quiet
 
-#       - name: Push Docker image to GCR
-#         run: |-
-#           docker push gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA
+      - name: Push Docker image to GCR
+        run: |-
+          docker push gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA
 
       # # - name: Build and tag the docker image
       # #   env:
