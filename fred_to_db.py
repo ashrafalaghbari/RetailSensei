@@ -20,7 +20,7 @@ class FredToDB:
         # Convert the data to a Pandas DataFrame
         df = pd.DataFrame(retail_sales, columns=['sales_amount'])
 
-        # add freq MS to index date
+        # add a monthly frequencey to index date
         df.index.freq = 'MS'
 
         # Convert the index and sales values of the DataFrame into a list of tuples
