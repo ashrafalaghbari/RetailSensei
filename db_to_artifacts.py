@@ -6,14 +6,10 @@ import sqlalchemy
 class SalesData:
     def __init__(self):
         # Get environment variables for database connection
-        # self.DB_USER = os.environ['DB_USER']
-        # self.DB_PASS = os.environ['DB_PASS']
-        # self.DB_NAME = os.environ['DB_NAME']
-        # self.INSTANCE_CONNECTION_NAME = os.environ['INSTANCE_CONNECTION_NAME']
-        self.DB_USER = "postgres"
-        self.DB_PASS = "626228282@As"
-        self.DB_NAME = "fred"
-        self.INSTANCE_CONNECTION_NAME = "starlit-brand-297618:asia-southeast1:postgresqlfred"
+        self.DB_USER = os.environ['DB_USER']
+        self.DB_PASS = os.environ['DB_PASS']
+        self.DB_NAME = os.environ['DB_NAME']
+        self.INSTANCE_CONNECTION_NAME = os.environ['INSTANCE_CONNECTION_NAME']
 
         # initialize Connector object
         self.connector = Connector()
