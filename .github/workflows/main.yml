@@ -69,13 +69,16 @@ jobs:
       #   with:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
       #     branch: main
+      - name: Build Docker Image
+        env:
+          IMAGE_NAME: sales-dash
+        run: docker build -t $IMAGE_NAME:latest .
 
       - name: Authorize Docker push
         run: gcloud auth configure-docker --quiet
 
       - name: Push Docker Image to Container Registry (GCR)
         env:
-          IMAGE_NAME: sales-dash
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
           GIT_TAG: v0.1.0
         run: |-
