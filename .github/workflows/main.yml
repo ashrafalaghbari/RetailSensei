@@ -63,13 +63,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: test-csv
-          path: datasets
-
-        
-      - name: Download CSV artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: test-csv
           path: artifacts
 
       # - name: Build Docker image
