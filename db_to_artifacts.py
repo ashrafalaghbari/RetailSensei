@@ -60,7 +60,7 @@ class SalesData:
         self.connector.close()
 
 # Specify the path where the test.csv file should be saved
-filepath = 'artifacts/test.csv'
+filepath = 'test.csv'
 
 # Create an instance of the SalesData class
 sales_data = SalesData()
