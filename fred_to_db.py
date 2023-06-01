@@ -6,6 +6,7 @@ from google.cloud.sql.connector import Connector, IPTypes
 
 class FredToDB:
     def __init__(self, fred_api_key, db_user, db_pass, db_name, instance_connection_name):
+
         self.fred_api_key = fred_api_key
         self.db_user = db_user
         self.db_pass = db_pass
