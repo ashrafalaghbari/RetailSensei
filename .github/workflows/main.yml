@@ -4,7 +4,13 @@ on:
       manual_run:
         description: 'Manually trigger the workflow'
         default: ''
-
+        
+env:
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  IMAGE_NAME: sales-dash
+  REPO_NAME: sales-live-dashboard
+  
+  
 jobs:
   Build-push-deploy:
     runs-on: ubuntu-latest
@@ -72,24 +78,15 @@ jobs:
       #     branch: main
         
       - name: Build and tag image
-        env:
-          PROJECT_ID: ${{ secrets.PROJECT_ID }}
-          IMAGE_NAME: sales-dash
         run: |-
-          docker build . --tag "gcr.io/$PROJECT_ID/$IMAGE_NAME:$GITHUB_SHA
+          docker build . -tag $IMAGE_NAME
 
-#       - name: Authorize Docker push
-#         run: gcloud auth configure-docker --quiet
+      - name: Authorize Docker push
+        run: gcloud auth configure-docker --quiet
 
-#       - name: Push Docker Image to Container Registry (GCR)
-#         env:
-#           PROJECT_ID: ${{ secrets.PROJECT_ID }}
-#           GIT_TAG: v0.1.0
-#         run: |-
-#           docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-#           docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
-#           docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
-#           docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
+      - name: Push Docker image to GCR
+        run: |-
+          docker build . --tag "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
 
       # # - name: Build and tag the docker image
       # #   env:
