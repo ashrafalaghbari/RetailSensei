@@ -82,9 +82,7 @@ jobs:
           PROJECT_ID: ${{ secrets.PROJECT_ID }}
           GIT_TAG: v0.1.0
         run: |-
-          docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
           docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
-          docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
           docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
 
       # # - name: Build and tag the docker image
