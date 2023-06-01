@@ -4,10 +4,6 @@ on:
       manual_run:
         description: 'Manually trigger the workflow'
         default: ''
-      
-  # push:
-  #   branches:
-  #     - main
 
 jobs:
   run_pipeline:
@@ -67,20 +63,36 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add artifacts/
-          git diff-index --quiet HEAD || (git commit -a -m "Add artifacts" --allow-empty)
+          git diff-index --quiet HEAD || (git commit -a -m "Add artifacts" --allow-empty --no-verify)
           
       - name: Push artifacts to the main branch
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
-        
 
-      # - name: Build Docker image
-      #   run: docker build -t gcr.io/starlit-brand-297618/salesapp:0.1.0 .
+      - name: Authorize Docker push
+        run: gcloud auth configure-docker
 
-      # - name: Push Docker image to GCR
-      #   run: |
-      #     gcloud auth configure-docker
-      #     docker push gcr.io/starlit-brand-297618/salesapp:0.1.0
-            
+      - name: Build and tag the docker image
+        env:
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          REPO_NAME: sales_live_dashboard
+          REGION: asia-southeast1
+        run: |-
+          docker build . --tag gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA
+
+      - name: Push the image to the Google Container Registry (GCR)
+        run: |-
+          docker push gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA
+
+      - name: Cleanup Docker images
+        run: docker image rm gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA
+
+      - name: Deploy
+        run: |-
+          gcloud run deploy $REPO_NAME \
+          --region $REGION \
+          --image gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA \
+          --platform "managed" \
+          --quiet
