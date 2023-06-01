@@ -13,13 +13,21 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Create artifact directory
-        run: mkdir -p path/to/artifact
+        run: mkdir -p artifacts
 
       - name: Create file with content
-        run: echo hello > path/to/artifact/world.txt
+        run: echo hello > artifacts/world.txt
+
+      - name: Commit artifacts to repository
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "Add artifacts"
+          git push
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: my-artifact
-          path: path/to/artifact/world.txt
+          path: artifacts/world.txt
