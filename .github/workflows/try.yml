@@ -1,0 +1,25 @@
+name: Example Workflow
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create artifact directory
+        run: mkdir -p path/to/artifact
+
+      - name: Create file with content
+        run: echo hello > path/to/artifact/world.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: path/to/artifact/world.txt
