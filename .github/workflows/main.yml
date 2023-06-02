@@ -51,6 +51,9 @@ jobs:
         run: |
           python fred_to_db.py
 
+      - name: Create artifact directory
+        run: mkdir -p artifacts
+
       - name: Run data pipeline - Cloud SQL to CSV
         env:
           DB_USER: ${{ secrets.DB_USER }}
@@ -73,23 +76,23 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
 
-      # - name: Build and tag image
-      #   run: |-
-      #     docker build . -t $IMAGE_NAME:$GIT_TAG
+#       - name: Build and tag image
+#         run: |-
+#           docker build . -t $IMAGE_NAME:$GIT_TAG
 
-      # - name: Authorize Docker push
-      #   run: gcloud auth configure-docker --quiet
+#       - name: Authorize Docker push
+#         run: gcloud auth configure-docker --quiet
 
-      # - name: Push Docker image to GCR
-      #   run: |-
-      #     docker push gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA
+#       - name: Push Docker image to GCR
+#         run: |-
+#           docker push gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA
           
-      # - name: Deploy
-      #   run: |-
-      #     gcloud components install beta --quiet
-      #     gcloud beta run deploy $REPO_NAME --image gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA \
-      #       --project $PROJECT_ID \
-      #       --platform managed \
-      #       --region $REGION \
-      #       --allow-unauthenticated \
-      #       --quiet
+#       - name: Deploy
+#         run: |-
+#           gcloud components install beta --quiet
+#           gcloud beta run deploy $REPO_NAME --image gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA \
+#             --project $PROJECT_ID \
+#             --platform managed \
+#             --region $REGION \
+#             --allow-unauthenticated \
+#             --quiet
