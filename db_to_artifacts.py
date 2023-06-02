@@ -40,18 +40,22 @@ class SalesData:
             results = db_conn.execute(sqlalchemy.text("SELECT * FROM retail_sales")).fetchall()
             sales_df = pd.DataFrame(results, columns=['id', 'sales_date', 'sales_amount'])
 
-        # Convert the sales_date column to a datetime type with a monthly frequency
-        # Remove the id column from the DataFrame
-        sales_df = sales_df.drop('id', axis=1)
-        sales_df['sales_date'] = pd.to_datetime(sales_df['sales_date'])
-        sales_df.set_index('sales_date', inplace=True)
-        sales_df.index = pd.date_range(start=sales_df.index.min(), end=sales_df.index.max(), freq='MS')
-        # Select only from the beginning of test set because we want to
-        # monitor the model performance after adding the new data points to the test set
-        sales_df = sales_df['2021-05-01':]
+        # check if there is new  onvservations in the sales_df
+        if len(sales_df) > 0:
+            # Convert the sales_date column to a datetime type with a monthly frequency
+            # Remove the id column from the DataFrame
+            sales_df = sales_df.drop('id', axis=1)
+            sales_df['sales_date'] = pd.to_datetime(sales_df['sales_date'])
+            sales_df.set_index('sales_date', inplace=True)
+            sales_df.index = pd.date_range(start=sales_df.index.min(), end=sales_df.index.max(), freq='MS')
+              # add new data points to the test set as this set will be used to monitor the model performance
+            # read test.csv file
+            test = pd.read_csv(filepath, index_col=0, parse_dates=True)
+            # append new data points to the test set
+            test = pd.concat([test, sales_df])
 
-        # Save the test.csv file to the specified filepath
-        sales_df.to_csv(filepath, index=True)
+            # Save the test.csv file to the specified filepath
+            sales_df.to_csv(filepath, index=True)
 
         return sales_df
 
