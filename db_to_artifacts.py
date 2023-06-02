@@ -36,11 +36,12 @@ class SalesData:
     # function to query data from database and return a DataFrame
     def save_sales_data(self, filepath):
         with self.pool.connect() as db_conn:
-            # query and fetch sales table
-            results = db_conn.execute(sqlalchemy.text("SELECT * FROM retail_sales")).fetchall()
+            # select data from the retail_sales table since '2023-03-01'
+            query = "SELECT * FROM retail_sales WHERE sales_date >= '2023-05-01'"
+            results = db_conn.execute(sqlalchemy.text(query)).fetchall()
             sales_df = pd.DataFrame(results, columns=['id', 'sales_date', 'sales_amount'])
 
-        # check if there is new  onvservations in the sales_df
+        # check if there is new onvservations in the sales_df
         if len(sales_df) > 0:
             # Convert the sales_date column to a datetime type with a monthly frequency
             # Remove the id column from the DataFrame
