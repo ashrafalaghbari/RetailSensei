@@ -56,9 +56,10 @@ class SalesData:
             test = pd.concat([test, sales_df])
 
             # Save the test.csv file to the specified filepath
-            sales_df.to_csv(filepath, index=True)
-
-        return sales_df
+            test.to_csv(filepath, index=True)
+            print('New sales data has been added to the test set')
+        else:
+            print('No new sales data has been added to the test set')
 
     # function to close the database connection
     def close(self):
@@ -70,8 +71,8 @@ filepath = 'artifacts/test.csv'
 # Create an instance of the SalesData class
 sales_data = SalesData()
 
-# Retrieve the sales data and save it as a CSV file
-sales_df = sales_data.save_sales_data(filepath)
+# Retrieve the new sales data records and save it as a CSV file
+sales_data.save_sales_data(filepath)
 
 # Close the database connection
 sales_data.close()
