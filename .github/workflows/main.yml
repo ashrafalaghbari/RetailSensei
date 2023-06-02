@@ -75,16 +75,16 @@ jobs:
 #           github_token: ${{ secrets.GITHUB_TOKEN }}
 #           branch: main
 
-      - name: Build and tag image
-        run: |-
-          docker build . -t $IMAGE_NAME:$GIT_TAG
-
       - name: Authorize Docker push
         run: gcloud auth configure-docker --quiet
 
+      - name: Build and tag image
+        run: |-
+          docker build . --tag "gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA"
+
       - name: Push Docker image to GCR
         run: |-
-          docker push $IMAGE_NAME:$GIT_TAG
+          docker push gcr.io/$CLOUD_RUN_PROJECT_ID/$REPO_NAME:$GITHUB_SHA
           
 #       - name: Deploy
 #         run: |-
