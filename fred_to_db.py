@@ -19,7 +19,7 @@ class FredToDB:
         retail_sales = fred.get_series('RSXFSN', observation_start='2023-05-01')
         # test the update functionality for the dashboard
         # Divide the data by 1000 to convert from millions of dollars to billions of dollars
-        retail_sales = pd.Series(data=[800000], index=pd.date_range(start='2023-05-01', periods=1, freq='MS'))/1000
+        # retail_sales = pd.Series(data=[800000], index=pd.date_range(start='2023-05-01', periods=1, freq='MS'))/1000
 
         # Convert the data to a Pandas DataFrame
         df = pd.DataFrame(retail_sales, columns=['sales_amount'])
