@@ -39,9 +39,11 @@ jobs:
 
       - name: Use gcloud CLI
         run: gcloud info
+      
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
-
-      - name: Run data pipeline - FRED to Cloud SQL
+      - name: Run data pipeline - FRED API to Cloud SQL
         env:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           INSTANCE_CONNECTION_NAME: ${{ secrets.INSTANCE_CONNECTION_NAME }}
