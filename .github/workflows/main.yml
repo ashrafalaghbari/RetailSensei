@@ -13,7 +13,7 @@ env:
   IMAGE_NAME: sales-dash
   REPO_NAME: sales-live-dashboard
   REGION: asia-southeast1
-  GIT_TAG: v0.1.0
+  GIT_TAG: v0.1
 
 jobs:
   Build-push-deploy:
@@ -52,9 +52,6 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME }}
         run: |
           python fred_to_db.py
-
-      - name: Create artifact directory
-        run: mkdir -p artifacts
 
       - name: Run data pipeline - Cloud SQL to CSV
         env:
