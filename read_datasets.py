@@ -1,4 +1,6 @@
 import pandas as pd
+import pandas as pd
+from fredapi import Fred
 import streamlit as st
 import requests
 import os

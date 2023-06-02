@@ -4,9 +4,13 @@ on:
       manual_run:
         description: 'Manually trigger the workflow'
         default: ''
-  # push:
-  #   branches:
-  #     - main
+
+  schedule:
+    - cron: '0 0 */15 * *'
+
+  push:
+    branches:
+      - main
 
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
@@ -75,23 +79,23 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
 
-      - name: Build and tag image
-        run: |-
-          docker build . -t $IMAGE_NAME:$GIT_TAG
-
       - name: Authorize Docker push
         run: gcloud auth configure-docker --quiet
 
+      - name: Build and tag image
+        run: |-
+          docker build . --tag "gcr.io/$PROJECT_ID/$REPO_NAME:$GIT_TAG"
+
       - name: Push Docker image to GCR
         run: |-
-          docker push $IMAGE_NAME:$GIT_TAG
+          docker push gcr.io/$PROJECT_ID/$REPO_NAME:$GIT_TAG
           
-#       - name: Deploy
-#         run: |-
-#           gcloud components install beta --quiet
-#           gcloud beta run deploy $REPO_NAME --image gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA \
-#             --project $PROJECT_ID \
-#             --platform managed \
-#             --region $REGION \
-#             --allow-unauthenticated \
-#             --quiet
+      - name: Deploy
+        run: |-
+          gcloud components install beta --quiet
+          gcloud beta run deploy $REPO_NAME --image gcr.io/$PROJECT_ID/$REPO_NAME:$GITHUB_SHA \
+            --project $PROJECT_ID \
+            --platform managed \
+            --region $REGION \
+            --allow-unauthenticated \
+            --quiet
