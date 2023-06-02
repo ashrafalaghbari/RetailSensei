@@ -14,7 +14,27 @@ import streamlit as st
 
 
 # Set the page layout
-st.set_page_config(layout="wide", page_title = "Real-Time Data Dashboard", page_icon = "Active")
+st.set_page_config(layout="wide", page_title = "Real-Time Dashboard", page_icon = "Active")
+
+hide_menu_style = """
+        <style>
+        #MainMenu {visibility: hidden;}
+        </style>
+        """
+st.markdown(hide_menu_style, unsafe_allow_html=True)
+
+
+
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: white;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 # Remove the white space at the top of the page
 st.markdown("""
         <style>
