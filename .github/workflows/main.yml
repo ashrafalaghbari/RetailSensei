@@ -1,9 +1,9 @@
 on:
-  workflow_dispatch:
-    inputs:
-      manual_run:
-        description: 'Manually trigger the workflow'
-        default: ''
+#   workflow_dispatch:
+#     inputs:
+#       manual_run:
+#         description: 'Manually trigger the workflow'
+#         default: ''
 
   schedule:
     - cron: '0 0 */15 * *'
