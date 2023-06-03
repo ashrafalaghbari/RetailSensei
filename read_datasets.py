@@ -20,7 +20,7 @@ class Datasets:
         self.test = self.test.squeeze()
         self.test.index.freq = 'MS'
 
-        # Read the entire data (train and test)
+        # Read the entire data (train and test) from 1992-01-01 to 2023-04-01
         self.entire_data = pd.read_csv('datasets/entire_data.csv', index_col=0, parse_dates=True)
         self.entire_data = self.entire_data.squeeze()
         self.entire_data.index.freq = 'MS'
@@ -34,7 +34,7 @@ class Datasets:
         self.seasonal_indices_series = self.seasonal_indices_series.squeeze()
         self.seasonal_indices_series.index.freq = 'MS'
 
-        # read the differene between cma and seasonal indices series
+        # read the residuals (what wasn't captured by trend and seasonality)
         self.residuals = pd.read_csv('datasets/residuals.csv', index_col=0, parse_dates=True)
         self.residuals = self.residuals.squeeze()
         self.residuals.index.freq = 'MS'
@@ -45,7 +45,7 @@ class Datasets:
         self.seasonal_indices_df = self.seasonal_indices_df.squeeze()
         self.seasonal_indices_df.index.freq = 'MS'
 
-        # forecast generated during model development from 1992-01-01 to 2023-04-01
+        # forecast generated during model development from 2021-05-01 to 2023-04-01
         self.hw_forecast_dev = pd.read_csv('datasets/hw_forecast_dev.csv', index_col=0, parse_dates=True)
         self.hw_forecast_dev = self.hw_forecast_dev.squeeze()
         self.hw_forecast_dev.index.freq = 'MS'
