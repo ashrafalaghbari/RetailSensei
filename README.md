@@ -32,6 +32,7 @@ After thorough evaluation, the Holt-Winters model was selected as the optimal an
 Including confidence intervals in the forecasts is crucial as it provides an indication of the reliability and uncertainty associated with the predictions. This information is valuable for decision-making and allows businesses to account for potential variations and prepare accordingly.
 
 The choice of the Holt-Winters model, along with the consideration of confidence intervals, ensures that the forecasting model provides reliable and actionable insights to support effective planning, resource allocation, and strategic decision-making.
+![saless](https://github.com/ashrafalaghbari/RetailSensei/assets/98224412/de06837f-149d-45e0-af34-bf02779f9c61)
 
 
 # Installation
