@@ -33,6 +33,15 @@ Including confidence intervals in the forecasts is crucial as it provides an ind
 
 The choice of the Holt-Winters model, along with the consideration of confidence intervals, ensures that the forecasting model provides reliable and actionable insights to support effective planning, resource allocation, and strategic decision-making.
 ![saless](https://github.com/ashrafalaghbari/RetailSensei/assets/98224412/de06837f-149d-45e0-af34-bf02779f9c61)
+## View Notebooks in Colab
+
+| Notebook | Colab Link |
+| -------- | ---------- |
+| Data Collection | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ashrafalaghbari/RetailSensei/blob/main/notebooks/data_collection.ipynb) |
+| Decomposition Forecasting | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ashrafalaghbari/RetailSensei/blob/main/notebooks/decomposition_forecasting.ipynb) |
+| Holt-Winters Model | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ashrafalaghbari/RetailSensei/blob/main/notebooks/holt_winters_model.ipynb) |
+| Linear Regression with Seasoanl Dummies | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ashrafalaghbari/RetailSensei/blob/main/notebooks/lr_with_seasoanl_dummies.ipynb) |
+| SARIMA| [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ashrafalaghbari/RetailSensei/blob/main/notebooks/sarimax.ipynb) |
 
 # Worflow
 ![sales](https://github.com/ashrafalaghbari/RetailSensei/assets/98224412/6d7b8e80-16a4-43af-a41d-31ebbdb8b5b8)
