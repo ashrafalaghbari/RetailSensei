@@ -14,8 +14,7 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.PROJECT_ID }}
-  IMAGE_NAME: sales-dash
-  REPO_NAME: sales-live-dashboard
+  IMAGE_NAME: retailsensei
   REGION: asia-southeast1
   GIT_TAG: v0.1
 
@@ -84,16 +83,15 @@ jobs:
 
       - name: Build and tag image
         run: |-
-          docker build . --tag "gcr.io/$PROJECT_ID/$REPO_NAME:$GIT_TAG"
+          docker build . --tag "gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG"
 
       - name: Push Docker image to GCR
         run: |-
-          docker push gcr.io/$PROJECT_ID/$REPO_NAME:$GIT_TAG
+          docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
           
       - name: Deploy
         run: |-
-          gcloud components install beta --quiet
-          gcloud beta run deploy $REPO_NAME --image gcr.io/$PROJECT_ID/$REPO_NAME:$GIT_TAG \
+          gcloud run deploy $IMAGE_NAME --image gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG \
             --project $PROJECT_ID \
             --platform managed \
             --region $REGION \
