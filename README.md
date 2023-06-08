@@ -71,7 +71,7 @@ Access the web application by opening the following URL in your web browser:
 http://localhost:8501
 ```
 
-If you prefer to use a Docker image, you can follow these additional steps:
+<!-- If you prefer to use a Docker image, you can follow these additional steps:
 
 Pull the Docker image from Docker Hub:
 ```bash
@@ -81,7 +81,7 @@ Run the Docker container:
 ```bash
 docker run -p 8501:8501 salesapp:0.1
 ```
-Access the web application using the same URL as mentioned above.
+Access the web application using the same URL as mentioned above. -->
 
 # Usage
 
