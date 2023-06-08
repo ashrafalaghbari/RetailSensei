@@ -1,5 +1,5 @@
 # Base image
-FROM python:3.8
+FROM python:3.8-slim-buster
 # EXPOSE 8501
 
 # Set the working directory in the container
