@@ -146,7 +146,7 @@ with tab1:
         xanchor="right",
         x=0.6
     ))
-    fig.update_layout(height=400, width=1200, showlegend=True, margin=dict(t=120, b=0, l=0, r=0))
+    fig.update_layout(height=400, width=1200, showlegend=True, margin=dict(t=140, b=0, l=0, r=0))
     st.plotly_chart(fig)
         # a1,a2, a3, a4, a5 = st.columns(5, gap="small")
     st.markdown("""<h3 style='text-align: center;font-family:Arial Black; 
@@ -154,7 +154,7 @@ with tab1:
                     unsafe_allow_html=True)
    
 
-    b1, b2, b3, b4, b5, b6, b7, b8, b10 = st.columns(9)
+    b1, b2, b3, b4, b5, b6, b7, b8, b9 = st.columns(9)
 
     last_models_metrics = evaluate_forecast('Holt-Winters Model', test[:-1], hw_forecast_dev_mean[:-1])
     current_models_metrics = evaluate_forecast('Holt-Winters Model', test[:], hw_forecast_dev_mean[:])
@@ -248,29 +248,9 @@ with tab1:
         </div>
         """.format(test.index.date[-1],
                     color, current_models_metrics['MAPE'].round(2)), unsafe_allow_html=True)
-
-    with b7:
-    # Render the metrics in a nice grey background
-        # Render the custom CSS
-        st.markdown(custom_style, unsafe_allow_html=True)
-
-        # Render the metrics in the dashboard layout
-        st.markdown("""
-        <div class="dashboard">
-            <div class="metric" style="text-align: center;font-family: Arial; font-size: 10px;">
-            Updated: {}
-            </div>
-            <div class="metric", style='text-align: center; font-family: Arial Black; font-size: 16px'>
-                Actual
-            </div>
-        <div class="metric" style="text-align: center; color: blue; font-family: Arial Black; font-size: 16px">
-                <b>{}</b>
-            </div>
-        </div>
-        """.format(test.index.date[-1], test.iloc[-1].round(2)), unsafe_allow_html=True)
-
+        
     with b3:
-    # Render the metrics in a nice grey background
+        # Render the metrics in a nice grey background
         # Render the custom CSS
         st.markdown(custom_style, unsafe_allow_html=True)
 
@@ -289,9 +269,9 @@ with tab1:
         </div>
         """.format(test.index.date[-2],
                 last_models_metrics['RMSE'].round(2)), unsafe_allow_html=True)
-
+        
     with b4:
-    # Render the metrics in a nice grey background
+        # Render the metrics in a nice grey background
         # Render the custom CSS
         st.markdown(custom_style, unsafe_allow_html=True)
             # Chnage the color of the metric based on the performance
@@ -317,50 +297,8 @@ with tab1:
                 color,
                 current_models_metrics['RMSE'].round(2)), unsafe_allow_html=True)
         
-    # with b9:
-    # # Render the metrics in a nice grey background
-    # # Render the custom CSS
-    #     st.markdown(custom_style, unsafe_allow_html=True)
-
-    #     # Render the metrics in the dashboard layout
-    #     st.markdown("""
-    #     <div class="dashboard">
-    #         <div class="metric" style="text-align: center; font-family: Helvetica ; font-size: 10px;">
-    #             Updated: {}
-    #         </div>
-    #         <div class="metric", style='text-align: center; font-family: Arial Black; font-size: 16px'>
-    #             Deviation
-    #         </div>
-    #     <div class="metric" style="text-align: center; color: blue;; font-family: Arial Black; font-size: 16px">
-    #             <b>{}</b>
-    #         </div>
-    #     </div>
-    #     """.format(test.index.date[-1],
-    #             (test.iloc[-1] - hw_forecast_dev_mean[-1]).round(2)), unsafe_allow_html=True)
-
-    with b8:
-    # Render the metrics in a nice grey background
-        # Render the custom CSS
-        st.markdown(custom_style, unsafe_allow_html=True)
-
-        # Render the metrics in the dashboard layout
-        st.markdown("""
-        <div class="dashboard">
-            <div class="metric" style="text-align: center; font-family: Helvetica ; font-size: 10px;">
-                Updated: {}
-            </div>
-            <div class="metric", style='text-align: center; font-family: Arial Black; font-size: 16px'>
-                Forecast
-            </div>
-            <div class="metric" style="text-align: center; color: blue;; font-family: Arial Black; font-size: 16px">
-                <b>{}</b>
-            </div>
-        </div>
-        """.format(test.index.date[-1],
-                hw_forecast_dev_mean[-1].round(2)), unsafe_allow_html=True)
-
     with b5:
-    # Render the metrics in a nice grey background
+        # Render the metrics in a nice grey background
         # Render the custom CSS
         st.markdown(custom_style, unsafe_allow_html=True)
 
@@ -379,9 +317,11 @@ with tab1:
         </div>
         """.format(test.index.date[-2],
                     last_models_metrics['MAE'].round(2)), unsafe_allow_html=True)
+        
+    
 
     with b6:
-    # Render the metrics in a nice grey background
+        # Render the metrics in a nice grey background
         # Render the custom CSS
         st.markdown(custom_style, unsafe_allow_html=True)
         # Chnage the color of the metric based on the performance
@@ -407,7 +347,50 @@ with tab1:
                 color,
                 current_models_metrics['MAE'].round(2)), unsafe_allow_html=True)
 
-    with b10:
+    with b7:
+        # Render the metrics in a nice grey background
+        # Render the custom CSS
+        st.markdown(custom_style, unsafe_allow_html=True)
+
+        # Render the metrics in the dashboard layout
+        st.markdown("""
+        <div class="dashboard">
+            <div class="metric" style="text-align: center;font-family: Arial; font-size: 10px;">
+            Updated: {}
+            </div>
+            <div class="metric", style='text-align: center; font-family: Arial Black; font-size: 16px'>
+                Actual
+            </div>
+        <div class="metric" style="text-align: center; color: blue; font-family: Arial Black; font-size: 16px">
+                <b>{}</b>
+            </div>
+        </div>
+        """.format(test.index.date[-1], test.iloc[-1].round(2)), unsafe_allow_html=True)
+
+    with b8:
+    # Render the metrics in a nice grey background
+        # Render the custom CSS
+        st.markdown(custom_style, unsafe_allow_html=True)
+
+        # Render the metrics in the dashboard layout
+        st.markdown("""
+        <div class="dashboard">
+            <div class="metric" style="text-align: center; font-family: Helvetica ; font-size: 10px;">
+                Updated: {}
+            </div>
+            <div class="metric", style='text-align: center; font-family: Arial Black; font-size: 16px'>
+                Forecast
+            </div>
+            <div class="metric" style="text-align: center; color: blue;; font-family: Arial Black; font-size: 16px">
+                <b>{}</b>
+            </div>
+        </div>
+        """.format(test.index.date[-1],
+                hw_forecast_dev_mean[-1].round(2)), unsafe_allow_html=True)
+
+ 
+
+    with b9:
         # Get the last date in the test set
         last_date = test.index[-1]
 
