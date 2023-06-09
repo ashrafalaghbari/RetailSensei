@@ -146,7 +146,7 @@ with tab1:
         xanchor="right",
         x=0.6
     ))
-    fig.update_layout(height=400, width=1200, showlegend=True, margin=dict(t=140, b=0, l=0, r=0))
+    fig.update_layout(height=400, width=1200, showlegend=True, margin=dict(t=160, b=0, l=0, r=0))
     st.plotly_chart(fig)
         # a1,a2, a3, a4, a5 = st.columns(5, gap="small")
     st.markdown("""<h3 style='text-align: center;font-family:Arial Black; 
