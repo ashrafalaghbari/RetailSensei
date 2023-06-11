@@ -60,7 +60,7 @@ env\Scripts\activate.bat
 
 ```bash
 git clone https://github.com/ashrafalaghbari/RetailSensei.git
-cd project-directory
+cd <project-directory>
 pip install -r requirements.txt
 streamlit run app.py
 ```
